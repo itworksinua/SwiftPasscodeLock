@@ -8,6 +8,8 @@
 
 import UIKit
 
+public typealias PasscodeLockCallback = ((_ lock: PasscodeLockType) -> Void)?
+
 open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegate {
     
     public enum LockState {
@@ -35,7 +37,9 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     @IBOutlet open weak var touchIDButton: UIButton?
     @IBOutlet open weak var placeholdersX: NSLayoutConstraint?
     
-    open var successCallback: ((_ lock: PasscodeLockType) -> Void)?
+    open var successCallback: PasscodeLockCallback
+    open var failureCallback: PasscodeLockCallback
+    
     open var dismissCompletionCallback: (()->Void)?
     open var animateOnDismiss: Bool
     open var notificationCenter: NotificationCenter?
@@ -246,6 +250,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     open func passcodeLockDidFail(_ lock: PasscodeLockType) {
         
         animateWrongPassword()
+        self.failureCallback?(lock)
     }
     
     open func passcodeLockDidChangeState(_ lock: PasscodeLockType) {
