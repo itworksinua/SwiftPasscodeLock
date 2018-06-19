@@ -41,10 +41,12 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     @IBOutlet open weak var deleteSignButton: UIButton?
     @IBOutlet open weak var touchIDButton: UIButton?
     @IBOutlet open weak var placeholdersX: NSLayoutConstraint?
+    @IBOutlet open weak var backButton: UIButton?
     
     open var successCallback: PasscodeLockCallback
     open var failureCallback: PasscodeLockCallback
     open var delegate: PasscodeDelegate?
+    open var showBackButton: Bool = false
     
     open var dismissCompletionCallback: (()->Void)?
     open var animateOnDismiss: Bool
@@ -70,6 +72,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         
         super.init(nibName: nibName, bundle: bundle)
         
+        backButton?.isHidden = !showBackButton
         passcodeLock.delegate = self
         notificationCenter = NotificationCenter.default
     }
