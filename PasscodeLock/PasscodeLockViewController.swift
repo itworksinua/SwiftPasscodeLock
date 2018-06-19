@@ -10,6 +10,11 @@ import UIKit
 
 public typealias PasscodeLockCallback = ((_ lock: PasscodeLockType) -> Void)?
 
+public protocol PasscodeDelegate {
+    
+    func passcodeEntered(_ lock: PasscodeLockType)
+}
+
 open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegate {
     
     public enum LockState {
@@ -39,6 +44,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     
     open var successCallback: PasscodeLockCallback
     open var failureCallback: PasscodeLockCallback
+    open var delegate: PasscodeDelegate?
     
     open var dismissCompletionCallback: (()->Void)?
     open var animateOnDismiss: Bool
@@ -258,6 +264,11 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         updatePasscodeView()
         animatePlaceholders(placeholders, toState: .inactive)
         deleteSignButton?.isEnabled = false
+        
+        let repo = lock.repository
+        if repo.hasPasscode, let _ = repo.passcode {
+            delegate?.passcodeEntered(lock)
+        }
     }
     
     open func passcodeLock(_ lock: PasscodeLockType, addedSignAtIndex index: Int) {
