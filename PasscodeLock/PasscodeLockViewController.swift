@@ -267,11 +267,6 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         updatePasscodeView()
         animatePlaceholders(placeholders, toState: .inactive)
         deleteSignButton?.isEnabled = false
-        
-        let repo = lock.repository
-        if repo.hasPasscode, let _ = repo.passcode {
-            delegate?.passcodeEntered(lock, delegate: self)
-        }
     }
     
     open func passcodeLock(_ lock: PasscodeLockType, addedSignAtIndex index: Int) {
@@ -288,5 +283,9 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
             
             deleteSignButton?.isEnabled = false
         }
+    }
+    
+    open func passcodeEntered(_ lock: PasscodeLockType) {
+        delegate?.passcodeEntered(lock, delegate: self)
     }
 }

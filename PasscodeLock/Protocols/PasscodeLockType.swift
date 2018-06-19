@@ -29,4 +29,6 @@ public protocol PasscodeLockTypeDelegate: class {
     func passcodeLockDidChangeState(_ lock: PasscodeLockType)
     func passcodeLock(_ lock: PasscodeLockType, addedSignAtIndex index: Int)
     func passcodeLock(_ lock: PasscodeLockType, removedSignAtIndex index: Int)
+    
+    func passcodeEntered(_ lock: PasscodeLockType)
 }
