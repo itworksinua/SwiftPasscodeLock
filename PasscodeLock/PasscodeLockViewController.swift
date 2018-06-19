@@ -12,7 +12,7 @@ public typealias PasscodeLockCallback = ((_ lock: PasscodeLockType) -> Void)?
 
 public protocol PasscodeDelegate {
     
-    func passcodeEntered(_ lock: PasscodeLockType)
+    func passcodeEntered(_ lock: PasscodeLockType, delegate: PasscodeLockTypeDelegate)
 }
 
 open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegate {
@@ -267,7 +267,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         
         let repo = lock.repository
         if repo.hasPasscode, let _ = repo.passcode {
-            delegate?.passcodeEntered(lock)
+            delegate?.passcodeEntered(lock, delegate: self)
         }
     }
     
