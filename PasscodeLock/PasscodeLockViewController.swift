@@ -11,8 +11,7 @@ import UIKit
 public typealias PasscodeLockCallback = ((_ lock: PasscodeLockType) -> Void)?
 
 public protocol PasscodeDelegate {
-    
-    func passcodeEntered(_ lock: PasscodeLockType, delegate: PasscodeLockTypeDelegate)
+    func passcodeEntered(_ lock: PasscodeLockType, passcode: String)
 }
 
 open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegate {
@@ -45,6 +44,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     
     open var successCallback: PasscodeLockCallback
     open var failureCallback: PasscodeLockCallback
+    
     open var delegate: PasscodeDelegate?
     open var showBackButton: Bool = false
     
@@ -215,7 +215,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         view.layoutIfNeeded()
         
         UIView.animate(
-            withDuration: 0.5,
+            withDuration: 1.0,
             delay: 0,
             usingSpringWithDamping: 0.2,
             initialSpringVelocity: 0,
@@ -285,7 +285,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         }
     }
     
-    open func passcodeEntered(_ lock: PasscodeLockType) {
-        delegate?.passcodeEntered(lock, delegate: self)
+    open func passcodeEntered(_ lock: PasscodeLockType, passcode: String) {
+        delegate?.passcodeEntered(lock, passcode: passcode)
     }
 }

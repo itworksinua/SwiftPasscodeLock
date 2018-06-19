@@ -46,7 +46,7 @@ open class PasscodeLock: PasscodeLockType {
             
             lockState.acceptPasscode(passcode, fromLock: self)
             passcode.removeAll(keepingCapacity: true)
-            delegate?.passcodeEntered(self)
+            delegate?.passcodeEntered(self, passcode:passcode.joined())
         }
     }
     

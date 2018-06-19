@@ -30,5 +30,5 @@ public protocol PasscodeLockTypeDelegate: class {
     func passcodeLock(_ lock: PasscodeLockType, addedSignAtIndex index: Int)
     func passcodeLock(_ lock: PasscodeLockType, removedSignAtIndex index: Int)
     
-    func passcodeEntered(_ lock: PasscodeLockType)
+    func passcodeEntered(_ lock: PasscodeLockType, passcode: String)
 }
