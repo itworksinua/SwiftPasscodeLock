@@ -44,7 +44,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="FIk-Rc-KVf">
-                    <rect key="frame" x="138" y="147" width="100" height="16"/>
+                    <rect key="frame" x="137.5" y="147" width="100" height="16"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w14-Kb-Jnf" userLabel="Placeholder 1" customClass="PasscodeSignPlaceholderView" customModule="PasscodeLock" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
@@ -430,7 +430,7 @@
                     <inset key="contentEdgeInsets" minX="15" minY="15" maxX="15" maxY="15"/>
                     <state key="normal" image="Vector.png"/>
                     <connections>
-                        <action selector="cancelButtonTap:" destination="-1" eventType="touchUpInside" id="um5-mR-x7Y"/>
+                        <action selector="backButtonTap:" destination="-1" eventType="touchUpInside" id="MmR-F0-f6i"/>
                     </connections>
                 </button>
             </subviews>

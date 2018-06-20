@@ -170,6 +170,10 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         passcodeLock.authenticateWithBiometrics()
     }
     
+    @IBAction func backButtonTap(_ sender: UIButton) {
+        cancelButtonTap(sender)
+    }
+    
     fileprivate func authenticateWithBiometrics() {
         
         if passcodeConfiguration.shouldRequestTouchIDImmediately && passcodeLock.isTouchIDAllowed {
