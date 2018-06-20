@@ -44,8 +44,8 @@ open class PasscodeLock: PasscodeLockType {
         
         if passcode.count >= configuration.passcodeLength {
             
-//            lockState.acceptPasscode(passcode, fromLock: self)
             delegate?.passcodeEntered(self, passcode:passcode.joined())
+            lockState.acceptPasscode(passcode, fromLock: self)
             passcode.removeAll(keepingCapacity: true)
         }
     }
