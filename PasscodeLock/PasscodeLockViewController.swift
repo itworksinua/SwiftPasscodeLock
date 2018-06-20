@@ -100,6 +100,10 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         
         setupEvents()
         backButton?.isHidden = !showBackButton
+        
+        for placeholder in placeholders {
+            placeholder.layer.borderWidth = 0
+        }
     }
     
     open override func viewDidAppear(_ animated: Bool) {
