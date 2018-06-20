@@ -34,6 +34,7 @@
 		C9DC08121B90DE1B007A4DD0 /* PasscodeSignPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DC08111B90DE1B007A4DD0 /* PasscodeSignPlaceholderView.swift */; };
 		C9DC08141B90DE50007A4DD0 /* PasscodeSignButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DC08131B90DE50007A4DD0 /* PasscodeSignButton.swift */; };
 		C9DC08161B90DF4E007A4DD0 /* PasscodeLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DC08151B90DF4E007A4DD0 /* PasscodeLockViewController.swift */; };
+		E0ACC3B820DA4F2000BF07C6 /* Vector.png in Resources */ = {isa = PBXBuildFile; fileRef = E0ACC3B720DA4F1F00BF07C6 /* Vector.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		C9DC08111B90DE1B007A4DD0 /* PasscodeSignPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeSignPlaceholderView.swift; sourceTree = "<group>"; };
 		C9DC08131B90DE50007A4DD0 /* PasscodeSignButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeSignButton.swift; sourceTree = "<group>"; };
 		C9DC08151B90DF4E007A4DD0 /* PasscodeLockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeLockViewController.swift; sourceTree = "<group>"; };
+		E0ACC3B720DA4F1F00BF07C6 /* Vector.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Vector.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +190,7 @@
 		C9DC07D31B90B1CE007A4DD0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E0ACC3B720DA4F1F00BF07C6 /* Vector.png */,
 				C9DC08111B90DE1B007A4DD0 /* PasscodeSignPlaceholderView.swift */,
 				C9DC08131B90DE50007A4DD0 /* PasscodeSignButton.swift */,
 				C9D3DF0A1B919CE4008561EB /* PasscodeLockView.xib */,
@@ -292,6 +295,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0ACC3B820DA4F2000BF07C6 /* Vector.png in Resources */,
 				C9DC07FC1B90D0A3007A4DD0 /* PasscodeLock.strings in Resources */,
 				C9D3DF0B1B919CE4008561EB /* PasscodeLockView.xib in Resources */,
 			);
