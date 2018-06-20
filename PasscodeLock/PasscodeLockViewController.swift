@@ -72,7 +72,6 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         
         super.init(nibName: nibName, bundle: bundle)
         
-        backButton?.isHidden = !showBackButton
         passcodeLock.delegate = self
         notificationCenter = NotificationCenter.default
     }
@@ -100,6 +99,8 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         deleteSignButton?.isEnabled = false
         
         setupEvents()
+        backButton?.isHidden = !showBackButton
+        backButton?.setImage(UIImage(named: "BackButton"), for: .normal)
     }
     
     open override func viewDidAppear(_ animated: Bool) {
@@ -109,6 +110,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         
             authenticateWithBiometrics()
         }
+        
     }
     
     internal func updatePasscodeView() {
