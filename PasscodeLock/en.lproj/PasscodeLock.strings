@@ -8,26 +8,26 @@
 
 /* Enter Passcode State */
 "PasscodeLockEnterTitle" = "Введите пароль";
-"PasscodeLockEnterDescription" = "Enter your passcode to proceed.";
+"PasscodeLockEnterDescription" = "";
 
 /* Set Passcode State */
 "PasscodeLockSetTitle" = "Введите новый пароль";
-"PasscodeLockSetDescription" = "Choose your passcode.";
+"PasscodeLockSetDescription" = "";
 
 /* Confirm Passcode State */
 "PasscodeLockConfirmTitle" = "Повторите пароль";
-"PasscodeLockConfirmDescription" = "Enter the passcode again.";
+"PasscodeLockConfirmDescription" = "";
 
 /* Change Passcode State */
-"PasscodeLockChangeTitle" = "Enter Old Passcode";
-"PasscodeLockChangeDescription" = "Enter your old passcode.";
+"PasscodeLockChangeTitle" = "";
+"PasscodeLockChangeDescription" = "";
 
 /* Passcode Mismatch State */
 "PasscodeLockMismatchTitle" = "Повторите пароль";
 "PasscodeLockMismatchDescription" = "Пароли не совпадают";
 
 /* Touch ID Reason */
-"PasscodeLockTouchIDReason" = "Authentication required to proceed";
+"PasscodeLockTouchIDReason" = "";
 
 /* Touch ID Fallback Button */
-"PasscodeLockTouchIDButton" = "Enter Passcode";
+"PasscodeLockTouchIDButton" = "";

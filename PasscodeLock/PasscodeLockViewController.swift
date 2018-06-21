@@ -96,7 +96,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         super.viewDidLoad()
         
         updatePasscodeView()
-        deleteSignButton?.isEnabled = false
+        //deleteSignButton?.isEnabled = false
         
         setupEvents()
         backButton?.isHidden = !showBackButton
@@ -215,7 +215,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     
     internal func animateWrongPassword() {
         
-        deleteSignButton?.isEnabled = false
+        //deleteSignButton?.isEnabled = false
         isPlaceholdersAnimationCompleted = false
         
         animatePlaceholders(placeholders, toState: .error)
@@ -258,7 +258,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     
     open func passcodeLockDidSucceed(_ lock: PasscodeLockType) {
         
-        deleteSignButton?.isEnabled = true
+        //deleteSignButton?.isEnabled = true
         animatePlaceholders(placeholders, toState: .inactive)
         dismissPasscodeLock(lock, completionHandler: { [weak self] () in
             self?.successCallback?(lock)
@@ -275,13 +275,13 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         
         updatePasscodeView()
         animatePlaceholders(placeholders, toState: .inactive)
-        deleteSignButton?.isEnabled = false
+        //deleteSignButton?.isEnabled = false
     }
     
     open func passcodeLock(_ lock: PasscodeLockType, addedSignAtIndex index: Int) {
         
         animatePlacehodlerAtIndex(index, toState: .active)
-        deleteSignButton?.isEnabled = true
+        //deleteSignButton?.isEnabled = true
     }
     
     open func passcodeLock(_ lock: PasscodeLockType, removedSignAtIndex index: Int) {
@@ -290,7 +290,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         
         if index == 0 {
             
-            deleteSignButton?.isEnabled = false
+            //deleteSignButton?.isEnabled = false
         }
     }
     
