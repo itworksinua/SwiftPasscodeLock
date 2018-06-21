@@ -47,6 +47,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     
     open var delegate: PasscodeDelegate?
     open var showBackButton: Bool = false
+    open var needDismisAfterConfirm: Bool = true
     
     open var dismissCompletionCallback: (()->Void)?
     open var animateOnDismiss: Bool
@@ -260,9 +261,13 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         
         //deleteSignButton?.isEnabled = true
         animatePlaceholders(placeholders, toState: .inactive)
-        dismissPasscodeLock(lock, completionHandler: { [weak self] () in
-            self?.successCallback?(lock)
-        })
+        if needDismisAfterConfirm {
+            dismissPasscodeLock(lock, completionHandler: { [weak self] () in
+                self?.successCallback?(lock)
+            })
+        } else {
+            self.successCallback?(lock)
+        }
     }
     
     open func passcodeLockDidFail(_ lock: PasscodeLockType) {
