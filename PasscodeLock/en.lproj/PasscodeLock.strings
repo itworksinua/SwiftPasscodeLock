@@ -16,7 +16,7 @@
 
 /* Confirm Passcode State */
 "PasscodeLockConfirmTitle" = "Повторите пароль";
-"PasscodeLockConfirmDescription" = "";
+"PasscodeLockConfirmDescription" = "Пароли не совпадают";
 
 /* Change Passcode State */
 "PasscodeLockChangeTitle" = "";
