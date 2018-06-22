@@ -42,6 +42,12 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     @IBOutlet open weak var placeholdersX: NSLayoutConstraint?
     @IBOutlet open weak var backButton: UIButton?
     @IBOutlet open weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet open weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet open weak var bottomButtonConstraint: NSLayoutConstraint!
+    
+    @IBOutlet open var digitButtonCollection: [UIButton]!
+    @IBOutlet open weak var digitButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet open weak var digitButtonWidthConstraint: NSLayoutConstraint!
     
     open var successCallback: PasscodeLockCallback
     open var failureCallback: PasscodeLockCallback
@@ -106,6 +112,8 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         for placeholder in placeholders {
             placeholder.layer.borderWidth = 0
         }
+        
+        configureDesignByDevice()
     }
     
     open override func viewDidAppear(_ animated: Bool) {
@@ -116,6 +124,59 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
             authenticateWithBiometrics()
         }
         
+    }
+    
+    func configureDesignByDevice() {
+        var titleFont: UIFont?
+        var descriptionFont: UIFont?
+        var topConstant: CGFloat
+        var buttonWidth: CGFloat = 48
+        var buttonHeight: CGFloat = 48
+        var buttonFontSize: CGFloat = 28
+        var bottomConstant: CGFloat
+        var bottomButtomConstant: CGFloat = 24
+        
+        let screenRect = UIScreen.main.bounds
+        if screenRect.width == 320 && screenRect.height == 568 { // se
+            titleFont = .robotoMedium(14)
+            descriptionFont = .robotoMedium(12)
+            
+            topConstant = 64
+            bottomConstant = 96
+        } else if screenRect.width == 414 && screenRect.height == 736 { //414 × 736 8+
+            titleFont = .robotoMedium(18)
+            descriptionFont = .robotoMedium(14)
+            
+            topConstant = 94
+            bottomConstant = 112
+            bottomButtomConstant = 28
+            
+            buttonWidth = 60
+            buttonHeight = 60
+            buttonFontSize = 32
+        } else if screenRect.width == 375 && screenRect.height == 812 { // 375 x 812 X
+            titleFont = .robotoMedium(18)
+            descriptionFont = .robotoMedium(14)
+            
+            topConstant = 94
+            bottomConstant = 112
+            bottomButtomConstant = 28
+        } else { // 375 × 667 8
+            titleFont = .robotoMedium(16)
+            descriptionFont = .robotoMedium(14)
+            
+            topConstant = 104
+            bottomConstant = 100
+        }
+        
+        digitButtonWidthConstraint.constant = buttonWidth
+        digitButtonHeightConstraint.constant = buttonHeight
+        digitButtonCollection.forEach({ $0.titleLabel?.font = .robotoRegular(buttonFontSize) })
+        bottomConstraint.constant = bottomConstant
+        bottomButtonConstraint.constant = bottomButtomConstant
+        topConstraint.constant = topConstant
+        titleLabel?.font = titleFont
+        descriptionLabel?.font = descriptionFont
     }
     
     internal func updatePasscodeView() {
