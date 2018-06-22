@@ -213,13 +213,19 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         shouldTryToAuthenticateWithBiometrics = false
     }
     
+    func configButtons(_ sender: PasscodeSignButton, lock: Bool) {
+        digitButtonCollection.forEach({ if $0 != sender { $0.isUserInteractionEnabled = !lock }})
+    }
+    
     // MARK: - Actions
     
     @IBAction func passcodeSignButtonTap(_ sender: PasscodeSignButton) {
         
         guard isPlaceholdersAnimationCompleted else { return }
         
+        configButtons(sender, lock: true)
         passcodeLock.addSign(sender.passcodeSign)
+        configButtons(sender, lock: false)
     }
     
     @IBAction func cancelButtonTap(_ sender: UIButton) {
