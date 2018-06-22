@@ -41,6 +41,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     @IBOutlet open weak var touchIDButton: UIButton?
     @IBOutlet open weak var placeholdersX: NSLayoutConstraint?
     @IBOutlet open weak var backButton: UIButton?
+    @IBOutlet open weak var topConstraint: NSLayoutConstraint!
     
     open var successCallback: PasscodeLockCallback
     open var failureCallback: PasscodeLockCallback
