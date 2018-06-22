@@ -17,11 +17,11 @@ struct ConfirmPasscodeState: PasscodeLockStateType {
     
     fileprivate var passcodeToConfirm: [String]
     
-    init(passcode: [String]) {
+    init(passcode: [String], isShowDescription: Bool = false) {
         
         passcodeToConfirm = passcode
         title = localizedStringFor("PasscodeLockConfirmTitle", comment: "Confirm passcode title")
-        description = localizedStringFor("PasscodeLockConfirmDescription", comment: "Confirm passcode description")
+        description = isShowDescription ? localizedStringFor("PasscodeLockConfirmDescription", comment: "Confirm passcode description") : ""
     }
     
     func acceptPasscode(_ passcode: [String], fromLock lock: PasscodeLockType) {
@@ -37,7 +37,7 @@ struct ConfirmPasscodeState: PasscodeLockStateType {
             let mismatchDescription = localizedStringFor("PasscodeLockMismatchDescription", comment: "Passcode mismatch description")
             
             let nextState = SetPasscodeState(title: mismatchTitle, description: mismatchDescription)*/
-            let nextState = ConfirmPasscodeState(passcode: passcodeToConfirm)
+            let nextState = ConfirmPasscodeState(passcode: passcodeToConfirm, isShowDescription: true)
             
             lock.changeStateTo(nextState)
             lock.delegate?.passcodeLockDidFail(lock)
