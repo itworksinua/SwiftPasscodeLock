@@ -215,6 +215,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     
     func configButtons(_ sender: PasscodeSignButton, lock: Bool) {
         digitButtonCollection.forEach({ if $0 != sender { $0.isUserInteractionEnabled = !lock }})
+        deleteSignButton?.isUserInteractionEnabled = !lock
     }
     
     // MARK: - Actions
