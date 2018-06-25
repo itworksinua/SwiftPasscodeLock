@@ -103,6 +103,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     open override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         updatePasscodeView()
         //deleteSignButton?.isEnabled = false
         
@@ -119,11 +120,28 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        
         if shouldTryToAuthenticateWithBiometrics {
         
             authenticateWithBiometrics()
         }
         
+    }
+    
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let nc = navigationController {
+            nc.isNavigationBarHidden = true
+        }
+    }
+    
+    open override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if let nc = navigationController {
+            nc.isNavigationBarHidden = false
+        }
     }
     
     func configureDesignByDevice() {
