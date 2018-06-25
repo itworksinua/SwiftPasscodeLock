@@ -41,6 +41,8 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     
     @IBOutlet open weak var loadingImage: UIImageView?
     
+    @IBOutlet open weak var loadingView: UIView?
+    
     @IBOutlet open weak var touchIDButton: UIButton?
     @IBOutlet open weak var placeholdersX: NSLayoutConstraint?
     @IBOutlet open weak var backButton: UIButton?
@@ -400,7 +402,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         rotateAnimation.toValue = CGFloat(Double.pi * 2)
         rotateAnimation.duration = 2.0
         rotateAnimation.repeatCount = Float.infinity
-        loadingImage?.isHidden = false
+        loadingView?.isHidden = false
         loadingImage?.layer.add(rotateAnimation, forKey: "rotate")
     }
 }
