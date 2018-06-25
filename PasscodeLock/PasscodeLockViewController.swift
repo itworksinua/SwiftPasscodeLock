@@ -38,6 +38,9 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     @IBOutlet open var placeholders: [PasscodeSignPlaceholderView] = [PasscodeSignPlaceholderView]()
     @IBOutlet open weak var cancelButton: UIButton?
     @IBOutlet open weak var deleteSignButton: UIButton?
+    
+    @IBOutlet open weak var loadingImage: UIImageView?
+    
     @IBOutlet open weak var touchIDButton: UIButton?
     @IBOutlet open weak var placeholdersX: NSLayoutConstraint?
     @IBOutlet open weak var backButton: UIButton?
@@ -387,6 +390,17 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     }
     
     open func passcodeEntered(_ lock: PasscodeLockType, passcode: String) {
+        rotateImage()
         delegate?.passcodeEntered(lock, passcode: passcode)
+    }
+    
+    open func rotateImage() {
+        let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
+        rotateAnimation.fromValue = 0
+        rotateAnimation.toValue = CGFloat(Double.pi * 2)
+        rotateAnimation.duration = 2.0
+        rotateAnimation.repeatCount = Float.infinity
+        loadingImage?.isHidden = false
+        loadingImage?.layer.add(rotateAnimation, forKey: "rotate")
     }
 }
