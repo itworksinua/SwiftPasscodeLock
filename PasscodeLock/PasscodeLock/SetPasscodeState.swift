@@ -21,10 +21,11 @@ struct SetPasscodeState: PasscodeLockStateType {
         self.description = description
     }
     
-    init() {
+    init(forNew:Bool = false) {
         
         title = localizedStringFor("PasscodeLockSetTitle", comment: "Set passcode title")
-        description = localizedStringFor("PasscodeLockSetDescription", comment: "Set passcode description")
+        
+        description = forNew ? "" :localizedStringFor("PasscodeLockSetDescription", comment: "Set passcode description")
     }
     
     func acceptPasscode(_ passcode: [String], fromLock lock: PasscodeLockType) {
