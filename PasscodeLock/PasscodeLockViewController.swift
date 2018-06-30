@@ -12,6 +12,11 @@ public typealias PasscodeLockCallback = ((_ lock: PasscodeLockType) -> Void)?
 
 public protocol PasscodeDelegate {
     func passcodeEntered(_ lock: PasscodeLockType, passcode: String)
+    func forgotPasscode()
+}
+
+public extension PasscodeDelegate {
+    func forgotPasscode() {}
 }
 
 open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegate {
@@ -265,6 +270,12 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     @IBAction func touchIDButtonTap(_ sender: UIButton) {
         
         passcodeLock.authenticateWithBiometrics()
+    }
+    
+    @IBAction func forgotPasscode(_ sender: UIButton) {
+        dismissPasscodeLock(passcodeLock) {
+            self.delegate?.forgotPasscode()
+        }
     }
     
     @IBAction func backButtonTap(_ sender: UIButton) {
