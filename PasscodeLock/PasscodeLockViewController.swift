@@ -273,9 +273,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     }
     
     @IBAction func forgotPasscode(_ sender: UIButton) {
-        dismissPasscodeLock(passcodeLock) {
-            self.delegate?.forgotPasscode()
-        }
+        self.delegate?.forgotPasscode()
     }
     
     @IBAction func backButtonTap(_ sender: UIButton) {
