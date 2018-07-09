@@ -19,6 +19,39 @@ public extension PasscodeDelegate {
     func forgotPasscode() {}
 }
 
+extension UIColor {
+    /*public convenience init?(hexString: String) {
+        let r, g, b, a: CGFloat
+        if hexString.hasPrefix("#") {
+            
+            let start = hexString.index(hexString.startIndex, offsetBy: 1)
+            let hexColor = hexString.substring(from: start)
+            
+            if hexColor.count == 8 {
+                let scanner = Scanner(string: hexColor)
+                var hexNumber: UInt64 = 0
+                
+                if scanner.scanHexInt64(&hexNumber) {
+                    r = CGFloat((hexNumber & 0xff000000) >> 24) / 255
+                    g = CGFloat((hexNumber & 0x00ff0000) >> 16) / 255
+                    b = CGFloat((hexNumber & 0x0000ff00) >> 8) / 255
+                    a = CGFloat(hexNumber & 0x000000ff) / 255
+                    
+                    self.init(red: r, green: g, blue: b, alpha: a)
+                    return
+                }
+            }
+        }
+        
+        return nil
+    }*/
+    
+    static var customHighlightDigitColor : UIColor {
+        //return UIColor.init(hexString: "#29b6f6ff")!
+        return .blue
+    }
+}
+
 open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegate {
     
     public enum LockState {
@@ -55,7 +88,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     @IBOutlet open weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet open weak var bottomButtonConstraint: NSLayoutConstraint!
     
-    @IBOutlet open var digitButtonCollection: [UIButton]!
+    @IBOutlet open var digitButtonCollection: [PasscodeSignButton]!
     @IBOutlet open weak var digitButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet open weak var digitButtonWidthConstraint: NSLayoutConstraint!
     
@@ -155,6 +188,9 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     }
     
     func configureDesignByDevice() {
+        digitButtonCollection.forEach({ $0.highlightBackgroundColor = .customHighlightDigitColor })
+        
+        
         var titleFont: UIFont?
         var descriptionFont: UIFont?
         var topConstant: CGFloat
