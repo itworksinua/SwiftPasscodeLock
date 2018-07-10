@@ -20,7 +20,7 @@ public extension PasscodeDelegate {
 }
 
 extension UIColor {
-    public convenience init?(hexString: String) {
+    /*public convenience init?(hexString: String) {
         let r, g, b, a: CGFloat
         if hexString.hasPrefix("#") {
             
@@ -44,10 +44,11 @@ extension UIColor {
         }
         
         return nil
-    }
+    }*/
     
     static var customHighlightDigitColor : UIColor {
-        return UIColor.init(hexString: "#29b6f6ff")!
+        //return UIColor.init(hexString: "#29b6f6ff")!
+        return .blue
     }
 }
 
