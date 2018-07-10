@@ -156,6 +156,8 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
             placeholder.layer.borderWidth = 0
         }
         
+        placeholders.forEach({ $0.layer.borderWidth = 0; $0.activeColor = .customHighlightDigitColor })
+        
         configureDesignByDevice()
     }
     
