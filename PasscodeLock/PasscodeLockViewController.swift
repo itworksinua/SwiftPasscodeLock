@@ -286,7 +286,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     
     @IBAction func passcodeSignButtonTap(_ sender: PasscodeSignButton) {
         
-        guard isPlaceholdersAnimationCompleted else { return }
+        guard isPlaceholdersAnimationCompleted, (loadingView?.isHidden)! else { return }
         
         configButtons(sender, lock: true)
         passcodeLock.addSign(sender.passcodeSign)
