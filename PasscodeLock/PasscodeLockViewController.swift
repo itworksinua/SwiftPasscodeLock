@@ -13,6 +13,7 @@ public typealias PasscodeLockCallback = ((_ lock: PasscodeLockType) -> Void)?
 public protocol PasscodeDelegate {
     func passcodeEntered(_ lock: PasscodeLockType, passcode: String)
     func forgotPasscode()
+    func newButtonTapped()
 }
 
 public extension PasscodeDelegate {
@@ -95,6 +96,8 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     open var successCallback: PasscodeLockCallback
     open var failureCallback: PasscodeLockCallback
     
+    private var isButtonTapAfterTry = false
+    
     open var delegate: PasscodeDelegate?
     open var showBackButton: Bool = false
     open var needDismisAfterConfirm: Bool = true
@@ -165,7 +168,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         
         
         if shouldTryToAuthenticateWithBiometrics {
-        
+            
             authenticateWithBiometrics()
         }
         
@@ -291,6 +294,10 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         configButtons(sender, lock: true)
         passcodeLock.addSign(sender.passcodeSign)
         configButtons(sender, lock: false)
+        if isButtonTapAfterTry {
+            isButtonTapAfterTry = false
+            self.delegate?.newButtonTapped()
+        }
     }
     
     @IBAction func cancelButtonTap(_ sender: UIButton) {
@@ -301,6 +308,11 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     @IBAction func deleteSignButtonTap(_ sender: UIButton) {
         
         passcodeLock.removeSign()
+        
+        if isButtonTapAfterTry {
+            isButtonTapAfterTry = false
+            self.delegate?.newButtonTapped()
+        }
     }
     
     @IBAction func touchIDButtonTap(_ sender: UIButton) {
@@ -310,6 +322,10 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     
     @IBAction func forgotPasscode(_ sender: UIButton) {
         self.delegate?.forgotPasscode()
+        if isButtonTapAfterTry {
+            isButtonTapAfterTry = false
+            self.delegate?.newButtonTapped()
+        }
     }
     
     @IBAction func backButtonTap(_ sender: UIButton) {
@@ -338,9 +354,9 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
             
             return
             
-        // if pushed in a navigation controller
+            // if pushed in a navigation controller
         } else if navigationController != nil {
-        
+            
             navigationController?.popViewController(animated: animateOnDismiss)
         }
         
@@ -370,11 +386,12 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
             animations: {
                 self.placeholdersX?.constant = 0
                 self.view.layoutIfNeeded()
-            },
+        },
             completion: { completed in
                 self.isPlaceholdersAnimationCompleted = true
                 self.animatePlaceholders(self.placeholders, toState: .inactive)
         })
+        isButtonTapAfterTry = true
     }
     
     internal func animatePlaceholders(_ placeholders: [PasscodeSignPlaceholderView], toState state: PasscodeSignPlaceholderView.State) {
@@ -391,7 +408,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         
         placeholders[index].animateState(state)
     }
-
+    
     // MARK: - PasscodeLockDelegate
     
     open func passcodeLockDidSucceed(_ lock: PasscodeLockType) {
