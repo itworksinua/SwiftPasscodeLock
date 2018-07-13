@@ -112,6 +112,10 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     
     fileprivate var shouldTryToAuthenticateWithBiometrics = true
     
+    open var passcodeLockState: PasscodeLockStateType {
+        return passcodeLock.state
+    }
+    
     // MARK: - Initializers
     
     public init(state: PasscodeLockStateType, configuration: PasscodeLockConfigurationType, animateOnDismiss: Bool = true) {
