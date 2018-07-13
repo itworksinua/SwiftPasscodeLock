@@ -248,6 +248,8 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         topConstraint.constant = topConstant
         titleLabel?.font = titleFont
         descriptionLabel?.font = descriptionFont
+        
+        touchIDButton?.isHidden = (passcodeLockState is SetPasscodeState) || (passcodeLockState is ConfirmPasscodeState)
     }
     
     internal func updatePasscodeView() {
@@ -257,7 +259,8 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         if (!passcodeLock.state.isCancellableAction) {
             cancelButton?.setTitle("", for: .normal)
         }
-        touchIDButton?.isHidden = !passcodeLock.isTouchIDAllowed
+        touchIDButton?.isHidden = (passcodeLockState is SetPasscodeState) || (passcodeLockState is ConfirmPasscodeState)
+
     }
     
     // MARK: - Events
