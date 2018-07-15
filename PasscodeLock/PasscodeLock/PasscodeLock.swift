@@ -43,10 +43,13 @@ open class PasscodeLock: PasscodeLockType {
         delegate?.passcodeLock(self, addedSignAtIndex: passcode.count - 1)
         
         if passcode.count >= configuration.passcodeLength {
-            
-            delegate?.passcodeEntered(self, passcode:passcode.joined())
-            lockState.acceptPasscode(passcode, fromLock: self)
-            passcode.removeAll(keepingCapacity: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {[weak self] in
+                if let weakSelf = self {
+                    weakSelf.lockState.acceptPasscode(weakSelf.passcode, fromLock: weakSelf)
+                    weakSelf.passcode.removeAll(keepingCapacity: true)
+                    weakSelf.delegate?.passcodeEntered(weakSelf, passcode:weakSelf.passcode.joined())
+                }
+            })
         }
     }
     
