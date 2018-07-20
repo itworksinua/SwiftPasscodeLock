@@ -306,11 +306,11 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         
         configButtons(sender, lock: true)
         passcodeLock.addSign(sender.passcodeSign)
-        configButtons(sender, lock: false)
         if isButtonTapAfterTry {
             isButtonTapAfterTry = false
             self.delegate?.newButtonTapped()
         }
+        configButtons(sender, lock: false)
     }
     
     @IBAction func cancelButtonTap(_ sender: UIButton) {
@@ -420,6 +420,9 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         guard index < placeholders.count && index >= 0 else { return }
         
         placeholders[index].animateState(state)
+        for placeholder in 0..<index {
+            placeholders[placeholder].animateState(.active)
+        }
     }
     
     // MARK: - PasscodeLockDelegate
