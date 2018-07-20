@@ -287,9 +287,15 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         shouldTryToAuthenticateWithBiometrics = false
     }
     
-    func configButtons(_ sender: PasscodeSignButton, lock: Bool) {
+    func configButtons(_ sender: UIButton, lock: Bool) {
         digitButtonCollection.forEach({ if $0 != sender { $0.isUserInteractionEnabled = !lock }})
         deleteSignButton?.isUserInteractionEnabled = !lock
+    }
+    
+    open func configButtons(lock: Bool) {
+        if let deleteSignButton = deleteSignButton {
+            configButtons(deleteSignButton, lock: lock)
+        }
     }
     
     // MARK: - Actions
