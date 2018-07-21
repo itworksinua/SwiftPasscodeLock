@@ -125,7 +125,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         passcodeConfiguration = configuration
         passcodeLock = PasscodeLock(state: state, configuration: configuration)
         
-        let nibName = "PasscodeLockView"
+        let nibName = "PasscodeLockView\(UIDevice.current.userInterfaceIdiom == .phone ? "" : "IPad")"
         let bundle: Bundle = bundleForResource(nibName, ofType: "nib")
         
         super.init(nibName: nibName, bundle: bundle)

@@ -12,7 +12,7 @@
 
 /* Set Passcode State */
 "PasscodeLockSetTitle" = "Введите новый пароль";
-"PasscodeLockSetDescription" = "Задайте 6-ти значный пароль\nдля входа в приложение";
+"PasscodeLockSetDescription" = "Задайте 6-значный пароль\nдля входа в приложение";
 
 /* Confirm Passcode State */
 "PasscodeLockConfirmTitle" = "Повторите пароль";
