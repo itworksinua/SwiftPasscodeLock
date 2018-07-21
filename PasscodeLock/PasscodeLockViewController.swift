@@ -90,8 +90,8 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     @IBOutlet open weak var bottomButtonConstraint: NSLayoutConstraint!
     
     @IBOutlet open var digitButtonCollection: [PasscodeSignButton]!
-    @IBOutlet open weak var digitButtonHeightConstraint: NSLayoutConstraint!
-    @IBOutlet open weak var digitButtonWidthConstraint: NSLayoutConstraint!
+    @IBOutlet open weak var digitButtonHeightConstraint: NSLayoutConstraint?
+    @IBOutlet open weak var digitButtonWidthConstraint: NSLayoutConstraint?
     
     open var successCallback: PasscodeLockCallback
     open var failureCallback: PasscodeLockCallback
@@ -164,7 +164,9 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
             placeholder.layer.borderWidth = 0
         }
         
-        configureDesignByDevice()
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            configureDesignByDevice()
+        }
     }
     
     open override func viewDidAppear(_ animated: Bool) {
@@ -240,8 +242,8 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
             bottomConstant = 100
         }
         
-        digitButtonWidthConstraint.constant = buttonWidth
-        digitButtonHeightConstraint.constant = buttonHeight
+        digitButtonWidthConstraint?.constant = buttonWidth
+        digitButtonHeightConstraint?.constant = buttonHeight
         digitButtonCollection.forEach({ $0.titleLabel?.font = .robotoRegular(buttonFontSize) })
         bottomConstraint.constant = bottomConstant
         bottomButtonConstraint.constant = bottomButtomConstant
