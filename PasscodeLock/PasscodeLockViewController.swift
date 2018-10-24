@@ -302,7 +302,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     
     // MARK: - Actions
     
-    @IBAction func cleanLongPress(_ sender: UILongPressGestureRecognizer) {
+    @IBAction open func cleanLongPress(_ sender: UILongPressGestureRecognizer) {
         passcodeLock.clean()
     }
     
