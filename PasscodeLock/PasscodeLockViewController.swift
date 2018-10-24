@@ -299,12 +299,11 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
             configButtons(deleteSignButton, lock: lock)
         }
     }
-    
-    // MARK: - Actions
-    
-    @IBAction open func cleanLongPress(_ sender: UILongPressGestureRecognizer) {
+    open func cleanLongPress(_ sender: UILongPressGestureRecognizer) {
         passcodeLock.clean()
     }
+    
+    // MARK: - Actions
     
     @IBAction func passcodeSignButtonTap(_ sender: PasscodeSignButton) {
         
