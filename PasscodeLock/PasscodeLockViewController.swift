@@ -299,8 +299,13 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
             configButtons(deleteSignButton, lock: lock)
         }
     }
-    open func cleanLongPress(_ sender: UILongPressGestureRecognizer) {
-        passcodeLock.clean()
+    open func cleanLongPress() {
+        var amount = passcodeLock.passcode.count
+        
+        while amount > 0 {
+            deleteSignButtonTap(nil)
+            amount -= 1
+        }
     }
     
     // MARK: - Actions
@@ -323,7 +328,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         dismissPasscodeLock(passcodeLock)
     }
     
-    @IBAction func deleteSignButtonTap(_ sender: UIButton) {
+    @IBAction func deleteSignButtonTap(_ sender: UIButton?) {
         
         passcodeLock.removeSign()
         
