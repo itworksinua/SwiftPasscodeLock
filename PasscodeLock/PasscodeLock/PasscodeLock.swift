@@ -57,6 +57,13 @@ open class PasscodeLock: PasscodeLockType {
         }
     }
     
+    open func clean() {
+        guard passcode.count > 0 else { return }
+        
+        passcode = []
+        delegate?.passcodeLock(self, removedSignAtIndex: passcode.count)
+    }
+    
     open func removeSign() {
         
         guard passcode.count > 0 else { return }

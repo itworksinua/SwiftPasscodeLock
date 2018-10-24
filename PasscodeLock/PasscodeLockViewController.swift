@@ -302,6 +302,10 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     
     // MARK: - Actions
     
+    @IBAction func cleanLongPress(_ sender: UILongPressGestureRecognizer) {
+        passcodeLock.clean()
+    }
+    
     @IBAction func passcodeSignButtonTap(_ sender: PasscodeSignButton) {
         
         guard isPlaceholdersAnimationCompleted, (loadingView?.isHidden)! else { return }
