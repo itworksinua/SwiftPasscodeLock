@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SwiftPasscodeLock"
-  s.version      = "1.1.5"
+  s.version      = "1.1.6"
   s.summary      = "Pin code validation written in swift"
 
   # This description is used to generate tags and improve search results.
@@ -66,7 +66,7 @@ Pod::Spec.new do |s|
 
   # s.platform     = :ios
   s.platform     = :ios, "10.0"
-  s.swift_version = '4.1'
+  s.swift_version = '4.2'
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
