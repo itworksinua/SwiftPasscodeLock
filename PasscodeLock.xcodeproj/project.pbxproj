@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AEBEF4C62181D4C900A238A6 /* PinCodeWrongAnimationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBEF4C52181D4C900A238A6 /* PinCodeWrongAnimationOptions.swift */; };
+		AEBEF4C82181D4DC00A238A6 /* PinCodeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBEF4C72181D4DC00A238A6 /* PinCodeAnimation.swift */; };
 		C99EAF431B90B05700D61E1B /* PasscodeLock.h in Headers */ = {isa = PBXBuildFile; fileRef = C99EAF421B90B05700D61E1B /* PasscodeLock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9D3DF0B1B919CE4008561EB /* PasscodeLockView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D3DF0A1B919CE4008561EB /* PasscodeLockView.xib */; };
 		C9D3DF131B91AD11008561EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D3DF121B91AD11008561EB /* AppDelegate.swift */; };
@@ -63,6 +65,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AEBEF4C52181D4C900A238A6 /* PinCodeWrongAnimationOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeWrongAnimationOptions.swift; sourceTree = "<group>"; };
+		AEBEF4C72181D4DC00A238A6 /* PinCodeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeAnimation.swift; sourceTree = "<group>"; };
 		C99EAF3F1B90B05700D61E1B /* PasscodeLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PasscodeLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C99EAF421B90B05700D61E1B /* PasscodeLock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasscodeLock.h; sourceTree = "<group>"; };
 		C99EAF441B90B05700D61E1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -146,6 +150,8 @@
 				C9DC07F71B90CF29007A4DD0 /* Functions.swift */,
 				C9DC07FA1B90D0A3007A4DD0 /* PasscodeLock.strings */,
 				C9DC08151B90DF4E007A4DD0 /* PasscodeLockViewController.swift */,
+				AEBEF4C52181D4C900A238A6 /* PinCodeWrongAnimationOptions.swift */,
+				AEBEF4C72181D4DC00A238A6 /* PinCodeAnimation.swift */,
 				C9D3DF471B91F099008561EB /* PasscodeLockPresenter.swift */,
 				E065163020DCEF31007B8627 /* FontExtension.swift */,
 			);
@@ -323,6 +329,7 @@
 			files = (
 				E065163120DCEF31007B8627 /* FontExtension.swift in Sources */,
 				C9DC07FF1B90D24A007A4DD0 /* SetPasscodeState.swift in Sources */,
+				AEBEF4C82181D4DC00A238A6 /* PinCodeAnimation.swift in Sources */,
 				C9DC08051B90D394007A4DD0 /* ChangePasscodeState.swift in Sources */,
 				C9DC08021B90D2BA007A4DD0 /* ConfirmPasscodeState.swift in Sources */,
 				C9DC08121B90DE1B007A4DD0 /* PasscodeSignPlaceholderView.swift in Sources */,
@@ -333,6 +340,7 @@
 				C9DC08161B90DF4E007A4DD0 /* PasscodeLockViewController.swift in Sources */,
 				C9DC07E11B90BBFD007A4DD0 /* PasscodeLock.swift in Sources */,
 				C9DC07F81B90CF29007A4DD0 /* Functions.swift in Sources */,
+				AEBEF4C62181D4C900A238A6 /* PinCodeWrongAnimationOptions.swift in Sources */,
 				C9DC07DB1B90B730007A4DD0 /* PasscodeLockConfigurationType.swift in Sources */,
 				C9DC07DE1B90BA06007A4DD0 /* PasscodeLockType.swift in Sources */,
 				C9DC07D51B90B1F6007A4DD0 /* PasscodeRepositoryType.swift in Sources */,

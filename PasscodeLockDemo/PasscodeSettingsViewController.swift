@@ -57,11 +57,20 @@ class PasscodeSettingsViewController: UIViewController {
         
         if passcodeSwitch.isOn {
             
-            passcodeVC = PasscodeLockViewController(state: .setPasscode, configuration: configuration)
+            let wrongPinAnimation: PinCodeShakeAnimationOptions = [.animationType(.linear),
+                                                                   .swingLength(40.0)]
+            
+            passcodeVC = PasscodeLockViewController(state: .setPasscode, configuration: configuration, wrongPinAnimation: wrongPinAnimation)
             
         } else {
             
-            passcodeVC = PasscodeLockViewController(state: .removePasscode, configuration: configuration)
+            let wrongPinAnimation: PinCodeShakeAnimationOptions = [.animationType(.linear),
+                                                                   .duration(0.350),
+                                                                   .isDamping(false),
+                                                                   .swingCount(2),
+                                                                   .swingLength(10.0)]
+            
+            passcodeVC = PasscodeLockViewController(state: .removePasscode, configuration: configuration, wrongPinAnimation: wrongPinAnimation)
             
             passcodeVC.successCallback = { lock in
                 

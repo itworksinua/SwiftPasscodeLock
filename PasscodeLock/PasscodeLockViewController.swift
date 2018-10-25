@@ -52,73 +52,6 @@ extension UIColor {
     }
 }
 
-// MARK: - Animations
-public enum PinCodeShakeDirection {
-    /// Shake left and right.
-    case horizontal
-    /// Shake up and down.
-    case vertical
-}
-
-public enum PinCodeShakeAnimationType {
-    /// linear animation.
-    case linear
-    /// easeIn animation.
-    case easeIn
-    /// easeOut animation.
-    case easeOut
-    /// easeInOut animation.
-    case easeInOut
-}
-
-internal extension UIView {
-    internal func shake(direction: PinCodeShakeDirection = .horizontal,
-                        duration: TimeInterval = 1,
-                        animationType: PinCodeShakeAnimationType = .linear,
-                        swingLength: CGFloat = 20.0,
-                        swingCount: Int = 4,
-                        isDamping: Bool = true,
-                        completion:(() -> Void)? = nil) {
-        CATransaction.begin()
-        let animation: CAKeyframeAnimation
-        switch direction {
-        case .horizontal:
-            animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
-        case .vertical:
-            animation = CAKeyframeAnimation(keyPath: "transform.translation.y")
-        }
-        switch animationType {
-        case .linear:
-            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
-        case .easeIn:
-            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
-        case .easeOut:
-            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
-        case .easeInOut:
-            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        }
-        CATransaction.setCompletionBlock(completion)
-        animation.duration = duration
-        
-        let count = swingCount * 2
-        var arr = [Int]()
-        arr += -1...count
-        let values: [Double] = arr.map {
-            if $0 == -1 {
-                return 0
-            }
-            let sign = $0 % 2 == 0 ? -1.0 : 1.0
-            let div = isDamping ? pow(2.0, Double($0/2)) : 1.0
-            return Double(($0 < count) ? (Double(swingLength) * sign) / div : Double(0.0))
-        }
-        
-        animation.values = values
-        
-        layer.add(animation, forKey: "shake")
-        CATransaction.commit()
-    }
-}
-
 open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegate {
     public enum LockState {
         case enterPasscode
@@ -171,6 +104,8 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     open var animateOnDismiss: Bool
     open var notificationCenter: NotificationCenter?
     
+    open var wrongPinCodeAnimationOptions: PinCodeShakeAnimationOptions
+    
     internal let passcodeConfiguration: PasscodeLockConfigurationType
     internal var passcodeLock: PasscodeLockType
     internal var isPlaceholdersAnimationCompleted = true
@@ -183,11 +118,16 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     
     // MARK: - Initializers
     
-    public init(state: PasscodeLockStateType, configuration: PasscodeLockConfigurationType, animateOnDismiss: Bool = true) {
+    public init(state: PasscodeLockStateType,
+                configuration: PasscodeLockConfigurationType,
+                animateOnDismiss: Bool = true,
+                wrongPinAnimation: PinCodeShakeAnimationOptions = PinCodeShakeAnimationOptionsDefault)
+    {
         self.animateOnDismiss = animateOnDismiss
         
         passcodeConfiguration = configuration
         passcodeLock = PasscodeLock(state: state, configuration: configuration)
+        wrongPinCodeAnimationOptions = wrongPinAnimation
         
         let nibName = "PasscodeLockView\(UIDevice.current.userInterfaceIdiom == .phone ? "" : "IPad")"
         let bundle: Bundle = bundleForResource(nibName, ofType: "nib")
@@ -198,8 +138,8 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         notificationCenter = NotificationCenter.default
     }
     
-    public convenience init(state: LockState, configuration: PasscodeLockConfigurationType, animateOnDismiss: Bool = true) {
-        self.init(state: state.getState(), configuration: configuration, animateOnDismiss: animateOnDismiss)
+    public convenience init(state: LockState, configuration: PasscodeLockConfigurationType, animateOnDismiss: Bool = true, wrongPinAnimation: PinCodeShakeAnimationOptions = PinCodeShakeAnimationOptionsDefault) {
+        self.init(state: state.getState(), configuration: configuration, animateOnDismiss: animateOnDismiss, wrongPinAnimation: wrongPinAnimation)
     }
     
     public required init(coder aDecoder: NSCoder) {
@@ -436,7 +376,13 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         isPlaceholdersAnimationCompleted = false
         animatePlaceholders(placeholders, toState: .error)
         
-        placeholderContainerView.shake(duration: 0.350, swingLength: 10, swingCount: 2, isDamping: false) {
+        placeholderContainerView.shake(direction: wrongPinCodeAnimationOptions.direction,
+                                       duration: wrongPinCodeAnimationOptions.duration,
+                                       animationType: wrongPinCodeAnimationOptions.animationType,
+                                       swingLength: wrongPinCodeAnimationOptions.swingLength,
+                                       swingCount: wrongPinCodeAnimationOptions.swingCount,
+                                       isDamping: wrongPinCodeAnimationOptions.isDamping)
+        {
             self.isPlaceholdersAnimationCompleted = true
             self.animatePlaceholders(self.placeholders, toState: .inactive)
         }
