@@ -30,12 +30,16 @@ open class PasscodeLockPresenter {
     
     public init(mainWindow window: UIWindow?,
                 configuration: PasscodeLockConfigurationType,
-                state: PasscodeLockStateType) {
+                state: PasscodeLockStateType,
+                wrongPinAnimation: PinCodeShakeAnimationOptions = PinCodeShakeAnimationOptionsDefault)
+    {
         mainWindow = window
         mainWindow?.windowLevel = UIWindow.Level(rawValue: 1)
         passcodeConfiguration = configuration
         passcodeState = state
-        passcodeLockVC = PasscodeLockViewController(state: passcodeState, configuration: passcodeConfiguration)
+        passcodeLockVC = PasscodeLockViewController(state: passcodeState,
+                                                    configuration: passcodeConfiguration,
+                                                    wrongPinAnimation: wrongPinAnimation)
     }
     
     open func presentPasscodeLock() {
