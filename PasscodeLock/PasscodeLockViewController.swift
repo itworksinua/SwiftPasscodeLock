@@ -104,6 +104,12 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     open var animateOnDismiss: Bool
     open var notificationCenter: NotificationCenter?
     
+    open var animatedAppearLoadingView: Bool = true
+    
+    open var loadViewIsHidden: Bool {
+        return ((loadingView?.alpha ?? 0.0) == 0.0) || (loadingView?.isHidden ?? true)
+    }
+    
     open var wrongPinCodeAnimationOptions: PinCodeShakeAnimationOptions
     
     internal let passcodeConfiguration: PasscodeLockConfigurationType
@@ -302,7 +308,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     // MARK: - Actions
     
     @IBAction func passcodeSignButtonTap(_ sender: PasscodeSignButton) {
-        guard isPlaceholdersAnimationCompleted, (loadingView?.isHidden ?? true) else { return }
+        guard isPlaceholdersAnimationCompleted, loadViewIsHidden else { return }
         
         configButtons(sender, lock: true)
         passcodeLock.addSign(sender.passcodeSign)
@@ -360,7 +366,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
             
             return
             
-                // if pushed in a navigation controller
+            // if pushed in a navigation controller
         } else if navigationController != nil {
             navigationController?.popViewController(animated: animateOnDismiss)
         }
@@ -444,7 +450,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     }
     
     open func passcodeEntered(_ lock: PasscodeLockType, passcode: String) {
-        rotateImage()
+        //        rotateImage()
         delegate?.passcodeEntered(lock, passcode: passcode)
     }
     
@@ -454,7 +460,42 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         rotateAnimation.toValue = CGFloat(Double.pi * 2)
         rotateAnimation.duration = 2.0
         rotateAnimation.repeatCount = Float.infinity
-        loadingView?.isHidden = false
         loadingImage?.layer.add(rotateAnimation, forKey: "rotate")
+        
+        showLoadingView()
+    }
+    
+    open func showLoadingView(animation: Bool? = nil) {
+        var localAnimationVar = animatedAppearLoadingView
+        if let animation = animation {
+            localAnimationVar = animation
+        }
+        
+        if loadingView?.isHidden ?? true {
+            loadingView?.isHidden = false
+        }
+        
+        if localAnimationVar {
+            UIView.animate(withDuration: 0.3) {
+                self.loadingView?.alpha = 1.0
+            }
+        } else {
+            self.loadingView?.alpha = 1.0
+        }
+    }
+    
+    open func hideLoadingView(animation: Bool? = nil) {
+        var localAnimationVar = animatedAppearLoadingView
+        if let animation = animation {
+            localAnimationVar = animation
+        }
+        
+        if localAnimationVar {
+            UIView.animate(withDuration: 0.3) {
+                self.loadingView?.alpha = 0.0
+            }
+        } else {
+            self.loadingView?.alpha = 0.0
+        }
     }
 }
