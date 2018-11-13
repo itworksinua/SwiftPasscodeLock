@@ -71,7 +71,11 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     
     @IBOutlet open weak var titleLabel: UILabel?
     @IBOutlet open weak var descriptionLabel: UILabel?
-    @IBOutlet open var placeholders: [PasscodeSignPlaceholderView] = [PasscodeSignPlaceholderView]()
+    
+    open var placeholders: [PasscodeSignPlaceholderView] {
+        return placeholderContainerView.arrangedSubviews.compactMap { $0 as? PasscodeSignPlaceholderView }
+    }
+    
     @IBOutlet open weak var placeholderContainerView: UIStackView!
     @IBOutlet open weak var cancelButton: UIButton?
     @IBOutlet open weak var deleteSignButton: UIButton?
@@ -127,8 +131,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     public init(state: PasscodeLockStateType,
                 configuration: PasscodeLockConfigurationType,
                 animateOnDismiss: Bool = true,
-                wrongPinAnimation: PinCodeShakeAnimationOptions = PinCodeShakeAnimationOptionsDefault)
-    {
+                wrongPinAnimation: PinCodeShakeAnimationOptions = PinCodeShakeAnimationOptionsDefault) {
         self.animateOnDismiss = animateOnDismiss
         
         passcodeConfiguration = configuration
@@ -296,6 +299,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
             configButtons(deleteSignButton, lock: lock)
         }
     }
+    
     open func cleanLongPress() {
         var amount = passcodeLock.passcode.count
         
@@ -366,7 +370,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
             
             return
             
-            // if pushed in a navigation controller
+                // if pushed in a navigation controller
         } else if navigationController != nil {
             navigationController?.popViewController(animated: animateOnDismiss)
         }
@@ -387,8 +391,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
                                        animationType: wrongPinCodeAnimationOptions.animationType,
                                        swingLength: wrongPinCodeAnimationOptions.swingLength,
                                        swingCount: wrongPinCodeAnimationOptions.swingCount,
-                                       isDamping: wrongPinCodeAnimationOptions.isDamping)
-        {
+                                       isDamping: wrongPinCodeAnimationOptions.isDamping) {
             self.isPlaceholdersAnimationCompleted = true
             self.animatePlaceholders(self.placeholders, toState: .inactive)
         }
